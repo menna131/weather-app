@@ -25,18 +25,3 @@ app.listen(port, ()=>{
 });
 
 
-// post request
-app.post('/postDta', function(req, res){
-    console.log(req.body);
-    projectData = {
-        temp: req.body.temp,
-        userFeeling: req.body.userFeeling,
-        date: req.body.date
-    }
-});
-
-// get request
-app.get('/getData', function(req, res){
-    console.log(res.body);
-    res.send(projectData);
-});

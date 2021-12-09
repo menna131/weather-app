@@ -1,3 +1,4 @@
+
 /* Global Variables */
 var projectData = {};
 var basicURL = "https://api.openweathermap.org/data/2.5/weather?zip=";
@@ -16,6 +17,10 @@ function fetchData(e){
         alert("enter zipcode");
     }else{
         getData(basicURL, apiKey, zipcodeValue, userFeeling)
+        .then(function (d){
+            // post data
+            postData('/postData', {temp: projectData.main.temp});
+        })
         .then(function(d){ 
             // update ui
             updateUI(d);
@@ -28,7 +33,25 @@ const getData = async function(basicURL, apiKey, zipcodeValue, userFeeling){
     try{
         const data = await res.json();
         data.userFeeling = userFeeling.value;
+        projectData = data;
         return data;
+    }catch(e){
+        console.log("error:", e);
+    }
+}
+
+const postData = async function(url='', {}){
+    const response = await fetch(url, {
+        method: "POST",
+        credentials: "same-origin",
+        headers: {
+            "Content-Type": 'application/json'
+        },
+        body: JSON.stringify(d)
+    });
+    try{
+        const newData = await response.json();
+        return newData;
     }catch(e){
         console.log("error:", e);
     }
@@ -36,8 +59,8 @@ const getData = async function(basicURL, apiKey, zipcodeValue, userFeeling){
 
 const updateUI = async function(data){
     document.getElementById('date').innerHTML = "Date: "+newDate;
-    document.getElementById('temp').innerHTML = "Temprature: "+data.main.temp;
+    document.getElementById('temp').innerHTML = "Temprature: "+projectData.main.temp;
     if(data.userFeeling !== ""){
-        document.getElementById('content').innerHTML = "Content: "+data.userFeeling;
+        document.getElementById('content').innerHTML = "Content: "+projectData.userFeeling;
     }
 }
