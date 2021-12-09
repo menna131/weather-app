@@ -35,7 +35,9 @@ const getData = async function(basicURL, apiKey, zipcodeValue, userFeeling){
 }
 
 const updateUI = async function(data){
-    document.getElementById('date').innerHTML = newDate;
-    document.getElementById('temp').innerHTML = data.main.temp;
-    document.getElementById('content').innerHTML = data.userFeeling;
+    document.getElementById('date').innerHTML = "Date: "+newDate;
+    document.getElementById('temp').innerHTML = "Temprature: "+data.main.temp;
+    if(data.userFeeling !== ""){
+        document.getElementById('content').innerHTML = "Content: "+data.userFeeling;
+    }
 }
