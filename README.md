@@ -9,6 +9,11 @@ This will require modifying the `server.js` file and the `website/app.js` file. 
 ## Extras
 If you are interested in testing your code as you go, you can use `tests.js` as a template for writing and running some basic tests for your code.
 
-# The tempreture is displaying when typing a zipcode, also I couldn't find a post url in the openweatherapp api,
-# so I won't be able to post the data.
-# I need more help please, thanks
+# now one of the issues is solveed
+# but I still have an issue sending a post request, as the request response always will bw 400
+# as I don't know the correct url for a post request
+## in "https://openweathermap.org/current": I can only get data not post it
+
+# I tried to go to the "knowledge udacity" for guidance, but it always redirects me to my classroom
+
+# kindly I neeed more assistance, thanks

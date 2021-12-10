@@ -18,10 +18,12 @@ function fetchData(e){
     }else{
         getData(basicURL, apiKey, zipcodeValue, userFeeling)
         .then(function (d){
+            console.log("1_______"+d.main.temp);
             // post data
-            postData('/postData', {temp: projectData.main.temp});
+            postData('/', {temp: d.main.temp, userFeeling: d.userFeeling});
         })
         .then(function(d){ 
+            console.log("2_______"+d);
             // update ui
             updateUI(d);
         })
@@ -51,6 +53,8 @@ const postData = async function(url='', {}){
     });
     try{
         const newData = await response.json();
+        console.log("huhuhhuhuh" +newData);
+        projectData = newData;
         return newData;
     }catch(e){
         console.log("error:", e);
@@ -59,8 +63,8 @@ const postData = async function(url='', {}){
 
 const updateUI = async function(data){
     document.getElementById('date').innerHTML = "Date: "+newDate;
-    document.getElementById('temp').innerHTML = "Temprature: "+projectData.main.temp;
-    if(data.userFeeling !== ""){
+    document.getElementById('temp').innerHTML = "Temprature: "+projectData.temp;
+    if(projectData.userFeeling !== ""){
         document.getElementById('content').innerHTML = "Content: "+projectData.userFeeling;
     }
 }
