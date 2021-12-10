@@ -18,12 +18,10 @@ function fetchData(e){
     }else{
         getData(basicURL, apiKey, zipcodeValue, userFeeling)
         .then(function (d){
-            console.log("1_______"+d.main.temp);
             // post data
             postData('/', {temp: d.main.temp, userFeeling: d.userFeeling});
         })
         .then(function(d){ 
-            console.log("2_______"+d);
             // update ui
             updateUI(d);
         })
@@ -53,7 +51,6 @@ const postData = async function(url='', {}){
     });
     try{
         const newData = await response.json();
-        console.log("huhuhhuhuh" +newData);
         projectData = newData;
         return newData;
     }catch(e){
